@@ -1,0 +1,17 @@
+org\bhavesh\micro\web\bean\Customer$CustomerBuilder.class
+org\bhavesh\micro\BeerLoader.class
+org\bhavesh\micro\configure\ApplicationSwaggerConfig.class
+org\bhavesh\micro\web\bean\Beer.class
+org\bhavesh\micro\repository\BeerRepository.class
+org\bhavesh\micro\BeweryProducerApplication.class
+org\bhavesh\micro\repository\CustomerRepository.class
+org\bhavesh\micro\web\bean\BeerPagedList.class
+org\bhavesh\micro\controller\CustomerController.class
+org\bhavesh\micro\service\CustomerService.class
+org\bhavesh\micro\controller\BeerController.class
+org\bhavesh\micro\web\bean\Beer$BeerBuilder.class
+org\bhavesh\micro\web\bean\BeerValidator.class
+org\bhavesh\micro\service\BeerService.class
+org\bhavesh\micro\controller\MVCExceptionHandler.class
+org\bhavesh\micro\web\bean\Customer.class
+org\bhavesh\micro\web\bean\BeerStyleEnum.class
