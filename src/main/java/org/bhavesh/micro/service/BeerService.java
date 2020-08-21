@@ -1,68 +1,56 @@
 package org.bhavesh.micro.service;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
+import org.bhavesh.micro.mapper.BeerMapper;
 import org.bhavesh.micro.repository.BeerRepository;
 import org.bhavesh.micro.web.bean.Beer;
+import org.bhavesh.micro.web.bean.dto.BeerDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import lombok.RequiredArgsConstructor;
+
 @Service
+@RequiredArgsConstructor
 public class BeerService 
 {
 	@Autowired
 	private BeerRepository beerRepository;
+	private final BeerMapper beerMapper;
 	
-	public BeerService(BeerRepository beerRepository)
+	
+	public BeerService(BeerRepository beerRepository,BeerMapper mapper)
 	{
+		this.beerMapper = mapper;
 		this.beerRepository=beerRepository;
 	}
-	public Beer getBeerbyID(UUID id)
+	public BeerDTO getBeerbyID(UUID id)
 	{
-		Optional<Beer> optBeer=beerRepository.findById(id);
-		if(optBeer.isPresent())
-		{	
-			return optBeer.get();
-		}
-		else
-		{
-			return null;
-		}
+		return beerMapper.beertoBeerDTO(beerRepository.findById(id).orElseThrow());
 	}
-	public void updateBeerbyID(UUID id,Beer beer)
+	public BeerDTO updateBeerbyID(UUID id,BeerDTO beerdto)
+	{	
+		Beer beer=beerRepository.findById(id).orElseThrow();
+		beer.setBeerName(beerdto.getBeerName());
+		beer.setBeerStyle(beerdto.getBeerStyle());
+		beer.setUpc(beerdto.getUpc());
+		beer.setPrice(beerdto.getPrice());
+		return beerMapper.beertoBeerDTO(beerRepository.save(beer));	
+	}
+	public BeerDTO saveBeer(BeerDTO beerDto)
 	{
-		if(beerRepository.existsById(id))
-		{
-			Beer saveBeer=Beer.builder().beerName(beer.getBeerName())
-						  .beerStyle(beer.getBeerStyle())
-						  .qunatityonhand(beer.getQunatityonhand())
-						  .upc(beer.getUpc())
-						  .build();
-			beerRepository.save(saveBeer);
-		}	
-	}
-	public void saveBeer(Beer beer)
-	{
-			Beer saveBeer=Beer.builder().beerName(beer.getBeerName())
-						  .beerStyle(beer.getBeerStyle())
-						  .qunatityonhand(beer.getQunatityonhand())
-						  .upc(beer.getUpc())
-						  .build();
-			beerRepository.save(saveBeer);	
-	}
-	
+			return beerMapper.beertoBeerDTO(beerRepository.save(beerMapper.beerDTOtoBeer(beerDto)));	
+	}	
 	public void deleteBeer(UUID id)
 	{
 		beerRepository.deleteById(id);
 	}
 	
-	public List<Beer> getBeerbyUpc(String upc)
+	public List<BeerDTO> getBeerbyUpc(String upc)
 	{
-		ArrayList<Beer> beerlist=beerRepository.getBeerbyUPC(upc);
-		return beerlist;
+		return beerMapper.beerListtoBeerDTO(beerRepository.getBeerbyUPC(upc));
 	}
 	
 	public Iterable<Beer> getAllbeer()

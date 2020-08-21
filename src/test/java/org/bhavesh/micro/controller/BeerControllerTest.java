@@ -7,8 +7,10 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 import java.math.BigDecimal;
 import java.util.UUID;
+
 import org.bhavesh.micro.BeerLoader;
 import org.bhavesh.micro.service.BeerService;
 import org.bhavesh.micro.web.bean.Beer;
@@ -24,8 +26,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 @WebMvcTest(BeerController.class)
 class BeerControllerTest {
-
-	/*
     @Autowired
     MockMvc mockMvc;
 
@@ -34,7 +34,7 @@ class BeerControllerTest {
 
     @MockBean
     BeerService beerService;
-
+    /*
     @Test
     void getBeerById() throws Exception {
 
@@ -70,7 +70,7 @@ class BeerControllerTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(beerDtoJson))
                 .andExpect(status().isNoContent());
-    }
+    }*/
 
     Beer getValidBeerDto(){
         return Beer.builder()
@@ -79,5 +79,5 @@ class BeerControllerTest {
                 .price(new BigDecimal("2.99"))
                 .upc(BeerLoader.BEER_1_UPC)
                 .build();
-    }*/
+    }
 }

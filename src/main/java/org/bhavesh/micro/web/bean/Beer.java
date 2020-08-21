@@ -29,7 +29,6 @@ import lombok.NoArgsConstructor;
 @Builder
 public class Beer 
 {
-	
 	@Id
 	@GeneratedValue(generator = "UUID")
 	@GenericGenerator(name="UUID",strategy = "org.hibernate.id.UUIDGenerator")
@@ -37,6 +36,7 @@ public class Beer
 	UUID id;
 	@NotBlank
 	String beerName;
+	@NotBlank
 	BeerStyleEnum beerStyle;
 	@Column(unique = true)
 	String upc;
