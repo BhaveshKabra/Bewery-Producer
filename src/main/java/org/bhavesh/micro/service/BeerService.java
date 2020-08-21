@@ -43,6 +43,8 @@ public class BeerService
 	{
 			return beerMapper.beertoBeerDTO(beerRepository.save(beerMapper.beerDTOtoBeer(beerDto)));	
 	}	
+	
+	
 	public void deleteBeer(UUID id)
 	{
 		beerRepository.deleteById(id);
